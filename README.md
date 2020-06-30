@@ -16,7 +16,7 @@ go build
 
 ## Usage
 
-Note: this tool expects to find AWS credentials (Access Key and Secret Key) in 
+Note: this tool expects to find AWS credentials (Access Key and Secret Key) in `~/.aws/credentials`.
 
 As it stands this tool can perform the following sub-commands:
 
