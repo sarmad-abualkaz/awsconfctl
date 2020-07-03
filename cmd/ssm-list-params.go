@@ -17,13 +17,15 @@ var SSMListCMD = &cobra.Command{
 
 func init(){
 	rootCmd.AddCommand(SSMListCMD)
+	SSMListCMD.Flags().StringVar(&contains, "contains", "", "SSM Parameter filter regex/string.")
+	SSMListCMD.Flags().Int64Var(&maxRes, "maxRes", 0, "Max respoonses from listing SSM Parameters.")
 }
 
-func listSSMParams(*cobra.Command, []string){
-	stg,_ := rootCmd.Flags().GetString("contains")
+func listSSMParams(SSMListCMD *cobra.Command, args []string){
 	profile,_ := rootCmd.Flags().GetString("profile")
 	region,_ := rootCmd.Flags().GetString("region")
-	maxRes,_ := rootCmd.Flags().GetInt64("maxRes")
+	stg,_ := SSMListCMD.Flags().GetString("contains")
+	maxRes,_ := SSMListCMD.Flags().GetInt64("maxRes")
 
 	// Check if string from --contains is blank
 	if stg != "" {

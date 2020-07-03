@@ -17,13 +17,15 @@ var SMListCMD = &cobra.Command{
 
 func init(){
 	rootCmd.AddCommand(SMListCMD)
+	SMListCMD.Flags().StringVar(&contains, "contains", "", "Secret filter regex/string.")
+	SMListCMD.Flags().Int64Var(&maxRes, "maxRes", 0, "Max respoonses from listing secrets.")
 }
 
-func listSMSecrets(*cobra.Command, []string){
-	stg,_ := rootCmd.Flags().GetString("contains")
+func listSMSecrets(SMListCMD *cobra.Command, args []string){
 	profile,_ := rootCmd.Flags().GetString("profile")
 	region,_ := rootCmd.Flags().GetString("region")
-	maxRes,_ := rootCmd.Flags().GetInt64("maxRes")
+	stg,_ := SMListCMD.Flags().GetString("contains")
+	maxRes,_ := SMListCMD.Flags().GetInt64("maxRes")
 
 	// Check if string from --contains is blank
 	if stg != "" {

@@ -19,10 +19,12 @@ var SMValueCMD = &cobra.Command{
 
 func init(){
 	rootCmd.AddCommand(SMValueCMD)
+	SMValueCMD.Flags().StringVar(&name, "name", "", "AWS Secret name.")
+
 }
 
-func getSMValue(*cobra.Command, []string){
-	secretName,_ := rootCmd.Flags().GetString("name")
+func getSMValue(SMValueCMD *cobra.Command, args []string){
+	secretName,_ := SMValueCMD.Flags().GetString("name")
 	profile,_ := rootCmd.Flags().GetString("profile")
 	region,_ := rootCmd.Flags().GetString("region")
 	

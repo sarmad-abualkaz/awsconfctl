@@ -19,10 +19,11 @@ var SSMValueCMD = &cobra.Command{
 
 func init(){
 	rootCmd.AddCommand(SSMValueCMD)
+	SSMValueCMD.Flags().StringVar(&name, "name", "", "SSM Parameter name.")
 }
 
-func getSSMValue(*cobra.Command, []string){
-	paramName,_ := rootCmd.Flags().GetString("name")
+func getSSMValue(SSMValueCMD *cobra.Command, args []string){
+	paramName,_ := SSMValueCMD.Flags().GetString("name")
 	profile,_ := rootCmd.Flags().GetString("profile")
 	region,_ := rootCmd.Flags().GetString("region")
 

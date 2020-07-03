@@ -19,14 +19,18 @@ var deleteCmd = &cobra.Command{
 
 func init(){
 	rootCmd.AddCommand(deleteCmd)
+	deleteCmd.Flags().StringVarP(&file, "file", "f", "", "File name.")
+	deleteCmd.Flags().BoolVarP(&deleteForGood, "deleteForGood", "d", false, "Boolean for delete command against secrets - secret to be deleted without any recovery window.")
+	deleteCmd.Flags().Int64Var(&recWindow, "recWindow", 7, "number of days that Secrets Manager waits before it can delete the secret.")
+
 }
 
-func deleteFile(*cobra.Command, []string){
-	file,_ := rootCmd.Flags().GetString("file")
+func deleteFile(deleteCmd *cobra.Command, args []string){
+	file,_ := deleteCmd.Flags().GetString("file")
 	profile,_ := rootCmd.Flags().GetString("profile")
 	region,_ := rootCmd.Flags().GetString("region")
-	recWindow,_ := rootCmd.Flags().GetInt64("recWindow")
-	deleteForGood,_ := rootCmd.Flags().GetBool("deleteForGood")
+	recWindow,_ := deleteCmd.Flags().GetInt64("recWindow")
+	deleteForGood,_ := deleteCmd.Flags().GetBool("deleteForGood")
 
 	// Check if file passed is blank
 	if file != "" {

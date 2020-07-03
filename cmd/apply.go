@@ -20,10 +20,11 @@ var applyCmd = &cobra.Command{
 
 func init(){
 	rootCmd.AddCommand(applyCmd)
+	applyCmd.Flags().StringVarP(&file, "file", "f", "", "File name.")
 }
 
-func applyFile(*cobra.Command, []string){
-	file,_ := rootCmd.Flags().GetString("file")
+func applyFile(applyCmd *cobra.Command, args []string){
+	file,_ := applyCmd.Flags().GetString("file")
 	profile,_ := rootCmd.Flags().GetString("profile")
 	region,_ := rootCmd.Flags().GetString("region")
 
